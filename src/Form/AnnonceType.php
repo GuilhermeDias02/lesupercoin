@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Annonce;
+use App\Entity\Categorie;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,7 +21,10 @@ class AnnonceType extends AbstractType
             ->add('title', TextType::class)
             ->add('prix', IntegerType::class)
             ->add('content', TextareaType::class)
-            // ->add('categorie')
+            ->add('categorie', EntityType::class, [
+                'class' => Categorie::class,
+                'choice_label' => 'libelle',
+            ])
             ->add("Poster", SubmitType::class);
         ;
     }
