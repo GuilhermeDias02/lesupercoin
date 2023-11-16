@@ -65,7 +65,45 @@ class AnnonceController extends AbstractController
         // return new Response("Bravo, l'annonce a bien ete ajoutee");
     }
 
-    #[Route('/annonce/modif', name:'')]
+    #[Route('/annonce/modif/{id}', name:'annonce_modif')]
+    public function modif(EntityManagerInterface $entityManager, $id, Request $request){
+        {
+            $annonce = $entityManager->getRepository(Annonce::class)->find($id);
+    
+            // $annonce = new Annonce();
+            // // $annonce->setTitle('Montre Rolex');
+            // // $annonce->setContent('Vends montre Rolex neuve !!');
+            // // $annonce->setPrix(5000);
+            // $date = new \DateTimeImmutable("now");
+            // $annonce->setCreatedate($date);
+    
+            $form = $this->createForm(AnnonceType::class, $annonce);
+    
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                // $form->getData() holds the submitted values
+                // but, the original `$task` variable has also been updated
+                $annonce = $form->getData();
+                
+                // ... perform some action, such as saving the task to the database
+                $annonce->setUpdatedate(new \DateTimeImmutable('now'));
+
+                $entityManager->persist($annonce);
+                $entityManager->flush();
+    
+                return $this->redirectToRoute('app_annonce', ['id'=> $annonce->getId()]);
+            }
+    
+            return $this->renderForm('annonce/_annonce_add.html.twig', [
+                'form' => $form,
+            ]);
+    
+            // $entityManager->persist($annonce);
+            // $entityManager->flush();
+    
+            // return new Response("Bravo, l'annonce a bien ete ajoutee");
+        }
+    }
 
     #[Route('annonce/add/succes', name:'annonce_add_succes')]
     public function succes(){

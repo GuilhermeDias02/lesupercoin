@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Annonce {# changer pout le titre de l'annonce #}
+{% endblock %}
+
+{% block stylesheets %}
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{{ asset('css/annonce/styles.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<section class="py-5 container">
+    {{form(form)}}
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/annonce/scripts.js"></script>
+{% endblock %}

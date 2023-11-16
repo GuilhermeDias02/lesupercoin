@@ -33,6 +33,10 @@
                         &nbsp;
                         <a onclick="return confirm('Etes vous sur de vouloir supprimer cette annonce ?')" href="{{ path('annonce_delete', {'id': annonce.id}) }}"><button class="btn btn-outline-dark flex-shrink-0" type="button"><i class="bi bi-trash"></i>
                         </button></a>
+                        &nbsp;
+                        &nbsp;
+                        <a href="{{ path('annonce_modif', {'id': annonce.id}) }}"><button class="btn btn-outline-dark flex-shrink-0" type="button">Modifier mon annonce
+                        </button></a>
                     </div>
                 </div>
             </div>
