@@ -22,7 +22,7 @@ class Categorie
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdate = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedate = null;
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Annonce::class)]

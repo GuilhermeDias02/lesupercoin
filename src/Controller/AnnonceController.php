@@ -32,11 +32,8 @@ class AnnonceController extends AbstractController
     public function add(ManagerRegistry $doctrine, Request $request)
     {
         $entityManager = $doctrine->getManager();
-
+        
         $annonce = new Annonce();
-        // $annonce->setTitle('Montre Rolex');
-        // $annonce->setContent('Vends montre Rolex neuve !!');
-        // $annonce->setPrix(5000);
         $date = new \DateTimeImmutable("now");
         $annonce->setCreatedate($date);
 
@@ -44,11 +41,8 @@ class AnnonceController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
             $annonce = $form->getData();
 
-            // ... perform some action, such as saving the task to the database
             $entityManager->persist($annonce);
             $entityManager->flush();
 
@@ -58,11 +52,6 @@ class AnnonceController extends AbstractController
         return $this->renderForm('annonce/_annonce_add.html.twig', [
             'form' => $form,
         ]);
-
-        // $entityManager->persist($annonce);
-        // $entityManager->flush();
-
-        // return new Response("Bravo, l'annonce a bien ete ajoutee");
     }
 
     #[Route('/annonce/modif/{id}', name:'annonce_modif')]
@@ -70,22 +59,12 @@ class AnnonceController extends AbstractController
         {
             $annonce = $entityManager->getRepository(Annonce::class)->find($id);
     
-            // $annonce = new Annonce();
-            // // $annonce->setTitle('Montre Rolex');
-            // // $annonce->setContent('Vends montre Rolex neuve !!');
-            // // $annonce->setPrix(5000);
-            // $date = new \DateTimeImmutable("now");
-            // $annonce->setCreatedate($date);
-    
             $form = $this->createForm(AnnonceType::class, $annonce);
     
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                // $form->getData() holds the submitted values
-                // but, the original `$task` variable has also been updated
                 $annonce = $form->getData();
                 
-                // ... perform some action, such as saving the task to the database
                 $annonce->setUpdatedate(new \DateTimeImmutable('now'));
 
                 $entityManager->persist($annonce);
@@ -97,11 +76,6 @@ class AnnonceController extends AbstractController
             return $this->renderForm('annonce/_annonce_add.html.twig', [
                 'form' => $form,
             ]);
-    
-            // $entityManager->persist($annonce);
-            // $entityManager->flush();
-    
-            // return new Response("Bravo, l'annonce a bien ete ajoutee");
         }
     }
 
