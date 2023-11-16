@@ -14,6 +14,10 @@
 {% block body %}
 <section class="py-5 container">
     Tout s'est bien passé vous pouvez revenir à l'accueil.
+    {% for message in app.flashes('success') %}
+        {{message}}
+        fait avec les message flash (plus flexible qu'un message predifinit)
+    {% endfor %}
 </section>
 {% endblock %}
 

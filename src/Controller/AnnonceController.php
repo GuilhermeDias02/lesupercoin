@@ -46,6 +46,8 @@ class AnnonceController extends AbstractController
             $entityManager->persist($annonce);
             $entityManager->flush();
 
+            $this->addFlash("success","Vous avez bien poste une annonce");
+
             return $this->redirectToRoute('annonce_add_succes');
         }
 
